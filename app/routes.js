@@ -1,5 +1,5 @@
 var AuthenticationController = require('./controllers/authentication'),  
-    TodoController = require('./controllers/todos'),  
+    ExerciseController = require('./controllers/exercises'),  
     express = require('express'),
     passportService = require('../config/passport'),
     passport = require('passport');
@@ -11,7 +11,7 @@ module.exports = function(app){
  
     var apiRoutes = express.Router(),
         authRoutes = express.Router(),
-        todoRoutes = express.Router();
+        exerciseRoutes = express.Router();
  
     // Auth Routes
     apiRoutes.use('/auth', authRoutes);
@@ -23,12 +23,12 @@ module.exports = function(app){
         res.send({ content: 'Success'});
     });
  
-    // Todo Routes
-    apiRoutes.use('/todos', todoRoutes);
+    // Exercise Routes
+    apiRoutes.use('/exercises', exerciseRoutes);
  
-    todoRoutes.get('/', requireAuth, AuthenticationController.roleAuthorization(['reader','creator','editor']), TodoController.getTodos);
-    todoRoutes.post('/', requireAuth, AuthenticationController.roleAuthorization(['creator','editor']), TodoController.createTodo);
-    todoRoutes.delete('/:todo_id', requireAuth, AuthenticationController.roleAuthorization(['editor']), TodoController.deleteTodo);
+    exerciseRoutes.get('/', requireAuth, AuthenticationController.roleAuthorization(['client','trainer','admin']), TodoController.getTodos);
+    todoRoutes.post('/', requireAuth, AuthenticationController.roleAuthorization(['trainer','admin']), TodoController.createTodo);
+    todoRoutes.delete('/:todo_id', requireAuth, AuthenticationController.roleAuthorization(['trainer','admin']), TodoController.deleteTodo);
  
     // Set up routes
     app.use('/api', apiRoutes);
