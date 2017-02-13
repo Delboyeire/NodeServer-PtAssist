@@ -11,7 +11,7 @@ var ProgramSchema = new mongoose.Schema({
         required: true
     },
     exercises: [
-     {type: Schema.Types.ObjectId, ref: 'Exercise'},
+     {type: mongoose.Schema.Types.ObjectId, ref: 'Exercise'},
      {
          sets:
          {

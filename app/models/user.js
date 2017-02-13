@@ -19,10 +19,10 @@ var UserSchema = new mongoose.Schema({
         default: 'client'
     },
     trainer: {
-        type: Schema.Types.ObjectId, 
+        type: mongoose.Schema.Types.ObjectId, 
         ref: 'User'
     },
-    programs:  [{ type : ObjectId, ref: 'Program' }]
+    programs:  [{ type : mongoose.Schema.Types.ObjectId, ref: 'Program' }]
  
 }, {
     timestamps: true
@@ -70,16 +70,6 @@ UserSchema.methods.comparePassword = function(passwordAttempt, cb){
     });
  
 }
-
-User.findClients({ role: 'client' }).where('trainer').gt(this.user.ObjectId).exec(function(err, users) {
-  if (err){
-      throw err;
-  } else {
-       return users
-  }
-
- 
-});
 
 
  

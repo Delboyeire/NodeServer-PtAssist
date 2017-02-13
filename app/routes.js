@@ -16,19 +16,20 @@ module.exports = function(app){
     // Auth Routes
     apiRoutes.use('/auth', authRoutes);
  
-    authRoutes.post('/register', AuthenticationController.register);
+    authRoutes.post('/register', AuthenticationController.registerUser);
+    
     authRoutes.post('/login', requireLogin, AuthenticationController.login);
  
     authRoutes.get('/protected', requireAuth, function(req, res){
-        res.send({ content: 'Success'});
+        res.sendStatus({ content: 'Success'});
     });
  
     // Exercise Routes
     apiRoutes.use('/exercises', exerciseRoutes);
  
-    exerciseRoutes.get('/', requireAuth, AuthenticationController.roleAuthorization(['client','trainer','admin']), TodoController.getTodos);
-    todoRoutes.post('/', requireAuth, AuthenticationController.roleAuthorization(['trainer','admin']), TodoController.createTodo);
-    todoRoutes.delete('/:todo_id', requireAuth, AuthenticationController.roleAuthorization(['trainer','admin']), TodoController.deleteTodo);
+    exerciseRoutes.get('/', requireAuth, AuthenticationController.roleAuthorization(['client','trainer','admin']), ExerciseController.getExercises);
+    exerciseRoutes.post('/', requireAuth, AuthenticationController.roleAuthorization(['trainer','admin']), ExerciseController.createExercise);
+    exerciseRoutes.delete('/:exercise_id', requireAuth, AuthenticationController.roleAuthorization(['trainer','admin']), ExerciseController.deleteExercise);
  
     // Set up routes
     app.use('/api', apiRoutes);

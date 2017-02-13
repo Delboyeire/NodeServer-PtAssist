@@ -21,22 +21,24 @@ function setUserInfo(request){
 exports.login = function(req, res, next){
  
     var userInfo = setUserInfo(req.user);
- 
+    console.log(userInfo)
     res.status(200).json({
         token: 'JWT ' + generateToken(userInfo),
         user: userInfo
     });
+    
  
 }
  
 exports.registerUser = function(req, res, next){
- 
+    console.log("In register function");
     var email = req.body.email;
     var password = req.body.password;
     var role = req.body.role;
-    var trainer = req.body.trainer;
-    var programs= req.body.programs;
- 
+    if( req.body.trainer)
+        var trainer = req.body.trainer;
+    if( req.body.trainer)
+        var programs= req.body.programs;
     if(!email){
         return res.status(422).send({error: 'You must enter an email address'});
     }

@@ -27,7 +27,7 @@ exports.createExercise = function(req, res, next){
             res.send(err);
         }
  
-        Todo.find(function(err, exercise) {
+        Exercise.find(function(err, exercise) {
  
             if (err){
                 res.send(err);
