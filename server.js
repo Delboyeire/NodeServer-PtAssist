@@ -20,8 +20,10 @@ var allowCrossDomain = function(req, res, next) {
 };
 
 app.use(allowCrossDomain);
- 
+
 mongoose.connect(databaseConfig.url);
+
+
  
 app.listen(process.env.PORT || 8080);
 console.log("App listening on port 8080");

@@ -12,7 +12,7 @@ var ExerciseSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    videolink: {
+    video: {
         type: String
     }
  
