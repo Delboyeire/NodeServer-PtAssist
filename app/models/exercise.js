@@ -14,6 +14,9 @@ var ExerciseSchema = new mongoose.Schema({
     },
     video: {
         type: String
+    },
+    image: {
+        type: String
     }
  
 }, {

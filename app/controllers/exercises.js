@@ -19,6 +19,7 @@ exports.createExercise = function(req, res, next){
         name : req.body.name,
         description: req.body.description,
         video: req.body.video,
+        image: req.body.image
         
     }, function(err, exercise) {
         
