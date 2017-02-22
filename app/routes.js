@@ -23,6 +23,7 @@ module.exports = function(app){
     authRoutes.get('/protected', requireAuth, function(req, res){
         res.sendStatus({ content: 'Success'});
     });
+    authRoutes.get('/:trainerid', requireAuth, AuthenticationController.roleAuthorization(['trainer']), AuthenticationController.getClients);
  
     // Exercise Routes
     apiRoutes.use('/exercises', exerciseRoutes);
