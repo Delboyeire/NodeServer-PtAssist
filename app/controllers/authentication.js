@@ -113,33 +113,17 @@ exports.roleAuthorization = function(roles){
  
 }
 exports.getClients = function(req, res, next){
-    console.log("In get client function");
     
-        var trainerid = req.params.trainerid;
-    
-    if(!trainer){
-        return res.status(422).send({error: 'No trainer'});
-    }
+    var trainerid = req.params.trainerid;
+        User.find({trainer: trainerid},function(err, clients) {
  
-    
- 
-    User.find({trainer: trainerid}, function(err, clients){
- 
-        if(err){
-                res.status(422).json({error: 'No clients found.'});
-                return next(err);
-            }
- 
-        var clientMap = {};
-       
-        clients.forEach(function(client) {
-            clientMap[client._id] = client;
-        });
-       
-        res.send(clientMap);
-        
-    
+        if (err){
+            res.send(err);
+        }
+        res.json(clients);
  
     });
  
 }
+ 
+ 
