@@ -36,10 +36,8 @@ exports.registerUser = function(req, res, next){
     var email = req.body.email;
     var password = req.body.password;
     var role = req.body.role;
-    if( req.body.trainer)
-        var trainer = req.body.trainer;
-    if( req.body.trainer)
-        var programs= req.body.programs;
+    var trainer = req.body.trainer;
+    var programs= req.body.programs;
     var name = req.body.name;
     if(!email){
         return res.status(422).send({error: 'You must enter an email address'});
