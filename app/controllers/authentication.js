@@ -113,7 +113,8 @@ exports.roleAuthorization = function(roles){
 exports.getClients = function(req, res, next){
     
     var trainerid = req.params.trainerid;
-        User.find({trainer: trainerid},function(err, clients) {
+    var _id = mongoose.Types.ObjectId.fromString(trainerid);
+        User.find({trainer: _id},function(err, clients) {
  
         if (err){
             res.send(err);
