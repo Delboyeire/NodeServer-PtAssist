@@ -113,7 +113,7 @@ exports.roleAuthorization = function(roles){
 exports.getClients = function(req, res, next){
     
     var trainerid = req.params.trainerid;
-        User.find({trainer: ObjectId(trainerid)},function(err, clients) {
+        User.find({trainer: trainerid},function(err, clients) {
  
         if (err){
             res.send(err);
