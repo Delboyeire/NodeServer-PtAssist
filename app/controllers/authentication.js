@@ -112,7 +112,7 @@ exports.roleAuthorization = function(roles){
 }
 exports.getClients = function(req, res, next){
     
-    var trainerid = req.params.trainerid;
+        var trainerid = req.params.trainerid;
         User.find({trainer: trainerid},function(err, clients) {
  
         if (err){
@@ -120,6 +120,19 @@ exports.getClients = function(req, res, next){
         }
         res.json(clients);
  
+    });
+ 
+}
+exports.deleteClient = function(req, res, next){
+ 
+    User.remove({
+        _id : req.params.id
+    }, function(err, client) {
+        if (err){
+                res.send(err);
+        }
+
+        res.json(client);
     });
  
 }

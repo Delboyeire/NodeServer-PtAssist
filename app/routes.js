@@ -24,6 +24,7 @@ module.exports = function(app){
         res.sendStatus({ content: 'Success'});
     });
     authRoutes.get('/:trainerid', requireAuth, AuthenticationController.roleAuthorization(['trainer']), AuthenticationController.getClients);
+    authRoutes.delete('/delete/:exercise_id', requireAuth, AuthenticationController.roleAuthorization(['trainer','admin']), AuthenticationController.deleteClient);
  
     // Exercise Routes
     apiRoutes.use('/exercises', exerciseRoutes);

@@ -2,23 +2,9 @@ var mongoose = require('mongoose');
  
 var ProgramSchema = new mongoose.Schema({
  
-    title: {
-        type: String,
-        required: true
-    },
-    description: {
-        type: String,
-        required: true
-    },
-    exercises: [
-     {type: mongoose.Schema.Types.ObjectId, ref: 'Exercise'},
-     {
-         sets:
-         {
-             type: Number
-         }
-     } ]
- 
+    title: {type: String, required: true},
+    description: {type: String, required: true},
+    exercises: [{Exercise:{type: mongoose.Schema.Types.ObjectId, ref: 'Exercise'},sets:{type: Number}} ]
 }, {
     timestamps: true
 });
