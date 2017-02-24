@@ -1,5 +1,6 @@
 var AuthenticationController = require('./controllers/authentication'),  
-    ExerciseController = require('./controllers/exercises'),  
+    ExerciseController = require('./controllers/exercises'), 
+    ProgramController = require('./controllers/programs'),  
     express = require('express'),
     passportService = require('../config/passport'),
     passport = require('passport');
@@ -32,6 +33,13 @@ module.exports = function(app){
     exerciseRoutes.get('/', requireAuth, AuthenticationController.roleAuthorization(['client','trainer','admin']), ExerciseController.getExercises);
     exerciseRoutes.post('/', requireAuth, AuthenticationController.roleAuthorization(['trainer','admin']), ExerciseController.createExercise);
     exerciseRoutes.delete('/:exercise_id', requireAuth, AuthenticationController.roleAuthorization(['trainer','admin']), ExerciseController.deleteExercise);
+ 
+    // Program Routes
+    apiRoutes.use('/programs', programRoutes);
+ 
+    programRoutes.get('/', requireAuth, AuthenticationController.roleAuthorization(['client','trainer','admin']), ProgramController.getPrograms);
+    programRoutes.post('/', requireAuth, AuthenticationController.roleAuthorization(['trainer','admin']), ProgramController.createProgram);
+    programRoutes.delete('/:exercise_id', requireAuth, AuthenticationController.roleAuthorization(['trainer','admin']), ProgramController.deleteProgram);
  
     // Set up routes
     app.use('/api', apiRoutes);
