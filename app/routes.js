@@ -12,7 +12,8 @@ module.exports = function(app){
  
     var apiRoutes = express.Router(),
         authRoutes = express.Router(),
-        exerciseRoutes = express.Router();
+        exerciseRoutes = express.Router(),
+        programRoutes = express.Router();
  
     // Auth Routes
     apiRoutes.use('/auth', authRoutes);
