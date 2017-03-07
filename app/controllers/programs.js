@@ -13,13 +13,27 @@ exports.getPrograms = function(req, res, next){
     });
  
 }
+exports.getTrainerPrograms = function(req, res, next){
+ 
+     var trainerid = req.params.trainer_id;
+        Program.find({createdby: trainer_id},function(err, clients) {
+ 
+        if (err){
+            res.send(err);
+        }
+        res.json(clients);
+ 
+    });
+ 
+}
  
 exports.createProgram = function(req, res, next){
  
     Program.create({
         title : req.body.title,
         description: req.body.description,
-        exercises: req.body.exercises
+        exercises: req.body.exercises,
+        createdby: req.body.createdby
 
     }, function(err, program) {
  
@@ -27,7 +41,7 @@ exports.createProgram = function(req, res, next){
             res.send(err);
         }
  
-        Program.find(function(err, program) {
+        Program.find(function(err, programs) {
  
             if (err){
                 res.send(err);

@@ -4,6 +4,10 @@ var ProgramSchema = new mongoose.Schema({
  
     title: {type: String, required: true},
     description: {type: String, required: true},
+    createdby: {
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'User'
+    }, 
     exercises: [{Exercise:{type: mongoose.Schema.Types.ObjectId, ref: 'Exercise'},sets:{type: Number}} ]
 }, {
     timestamps: true
