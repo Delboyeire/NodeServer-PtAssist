@@ -15,7 +15,7 @@ exports.getPrograms = function(req, res, next){
 }
 exports.getTrainerPrograms = function(req, res, next){
  
-     var trainerid = req.params.trainer_id;
+     var trainer_id = req.params.trainer_id;
         Program.find({createdby: trainer_id},function(err, clients) {
  
         if (err){

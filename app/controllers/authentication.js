@@ -126,7 +126,7 @@ exports.getClients = function(req, res, next){
 exports.deleteClient = function(req, res, next){
  
     User.remove({
-        _id : req.params.id
+        _id : req.params.user_id
     }, function(err, client) {
         if (err){
                 res.send(err);
