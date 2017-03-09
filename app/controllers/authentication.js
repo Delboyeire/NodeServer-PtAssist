@@ -110,6 +110,26 @@ exports.roleAuthorization = function(roles){
     }
  
 }
+exports.getClientDetails = function(roles){
+ 
+    return function(req, res, next){
+ 
+        var client_id = req.client_id;
+ 
+        User.findById(client_id, function(err, foundUser){
+ 
+            if(err){
+                res.status(422).json({error: 'No client found.'});
+                return next(err);
+            }
+ 
+             res.json(foundUser);
+ 
+        });
+ 
+    }
+ 
+}
 exports.getClients = function(req, res, next){
     
         var trainerid = req.params.trainerid;

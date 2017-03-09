@@ -27,7 +27,7 @@ module.exports = function(app){
     });
     authRoutes.get('/:trainerid', requireAuth, AuthenticationController.roleAuthorization(['trainer']), AuthenticationController.getClients);
     authRoutes.delete('/delete/:user_id', requireAuth, AuthenticationController.roleAuthorization(['trainer','admin']), AuthenticationController.deleteClient);
- 
+    authRoutes.get('/clientdetail/:client_id', requireAuth, AuthenticationController.roleAuthorization(['trainer']), AuthenticationController.getClientDetails);
     // Exercise Routes
     apiRoutes.use('/exercises', exerciseRoutes);
  
