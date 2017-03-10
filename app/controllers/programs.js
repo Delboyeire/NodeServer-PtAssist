@@ -62,8 +62,11 @@ exports.addClientProgram = function(req, res, next){
         description: req.body.description,
         exercises: req.body.exercises,
         createdby: req.body.createdby };
-        console.log(new_program);
+
+    console.log(new_program);
+
     var client_id = req.body.client_id;
+    
     Program.create({
         title : req.body.title,
         description: req.body.description,
@@ -78,11 +81,12 @@ exports.addClientProgram = function(req, res, next){
             {safe: true, upsert: true},
             function(err, User) {
                 console.log(err);
-            }
-        );
+            });
+        
         if (err){
             res.send(err);
-        }
+    }
+    });
         
       
  
