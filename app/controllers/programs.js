@@ -66,6 +66,7 @@ exports.addClientProgram = function(req, res, next){
     console.log(new_program);
 
     var client_id = req.body.client_id;
+    var new_program_id;
     
     Program.create({
         title : req.body.title,
@@ -74,8 +75,11 @@ exports.addClientProgram = function(req, res, next){
         createdby: req.body.createdby
 
     }, function(err, program) {
-        var program_id = program._id;
-         User.findByIdAndUpdate(
+        new_program_id = program._id;
+        console.log("New Program id :" + new_program_id);
+    
+    });
+     User.findByIdAndUpdate(
             client_id,
             {$push: {programs: program_id}},
             {safe: true, upsert: true},
@@ -85,8 +89,6 @@ exports.addClientProgram = function(req, res, next){
         
         if (err){
             res.send(err);
-    }
-    });
         
       
  
