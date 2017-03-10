@@ -81,7 +81,7 @@ exports.addClientProgram = function(req, res, next){
     });
      User.findByIdAndUpdate(
             client_id,
-            {$push: {programs: program_id}},
+            {$push: {programs: new_program_id}},
             {safe: true, upsert: true},
             function(err, User) {
                 console.log(err);
