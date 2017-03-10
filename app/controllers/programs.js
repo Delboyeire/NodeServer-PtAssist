@@ -62,11 +62,9 @@ exports.addClientProgram = function(req, res, next){
         description: req.body.description,
         exercises: req.body.exercises,
         createdby: req.body.createdby};
-        User.findByIdAndUpdate(req.body.client_id,{$push: {"programs": new_program}},{safe: true, upsert: true, new : true},
-        function(err, program) {
-            res.json(program);
-        }
-    );
+        console.log(new_program);
+
+        User.findOneAndUpdate(req.body.client_id,{$push: {"programs": new_program}});
        
 
    
