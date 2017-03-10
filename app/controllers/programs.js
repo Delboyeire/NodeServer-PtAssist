@@ -77,6 +77,9 @@ exports.addClientProgram = function(req, res, next){
     }, function(err, program) {
         new_program_id = program._id;
         console.log("New Program id :" + new_program_id);
+        if(err){
+            res.send(err);
+        }
     
     });
      User.findByIdAndUpdate(
@@ -84,7 +87,9 @@ exports.addClientProgram = function(req, res, next){
             {$push: {programs: new_program_id}},
             {safe: true, upsert: true},
             function(err, User) {
-                console.log(err);
+                if(err){
+                res.send(err);
+                }
             });
 }
 exports.deleteProgram = function(req, res, next){
