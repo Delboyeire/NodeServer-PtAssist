@@ -86,15 +86,6 @@ exports.addClientProgram = function(req, res, next){
             function(err, User) {
                 console.log(err);
             });
-        
-        if (err){
-            res.send(err);
-        
-      
- 
-
-   
- 
 }
 exports.deleteProgram = function(req, res, next){
  
