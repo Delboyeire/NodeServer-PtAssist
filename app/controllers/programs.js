@@ -61,19 +61,30 @@ exports.addClientProgram = function(req, res, next){
         title : req.body.title,
         description: req.body.description,
         exercises: req.body.exercises,
-        createdby: req.body.createdby};
+        createdby: req.body.createdby };
         console.log(new_program);
     var client_id = req.body.client_id;
+    Program.create({
+        title : req.body.title,
+        description: req.body.description,
+        exercises: req.body.exercises,
+        createdby: req.body.createdby
 
-        
-       User.findByIdAndUpdate(
-        client_id,
-        {$push: {programs: new_program}},
-        {safe: true, upsert: true},
-        function(err, User) {
-            console.log(err);
+    }, function(err, program) {
+        var program_id = program._id;
+         User.findByIdAndUpdate(
+            client_id,
+            {$push: {programs: program_id}},
+            {safe: true, upsert: true},
+            function(err, User) {
+                console.log(err);
+            }
+        );
+        if (err){
+            res.send(err);
         }
-);
+        
+      
  
 
    
