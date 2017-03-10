@@ -1,4 +1,5 @@
 var Program = require('../models/program');
+var User = require('../models/user');
  
 exports.getPrograms = function(req, res, next){
  
@@ -54,7 +55,23 @@ exports.createProgram = function(req, res, next){
     });
  
 }
+exports.addClientProgram = function(req, res, next){
  
+   var new_program = {
+        title : req.body.title,
+        description: req.body.description,
+        exercises: req.body.exercises,
+        createdby: req.body.createdby};
+        User.findByIdAndUpdate(req.body.client_id,{$push: {"programs": new_program}},{safe: true, upsert: true, new : true},
+        function(err, program) {
+            res.json(program);
+        }
+    );
+       
+
+   
+ 
+}
 exports.deleteProgram = function(req, res, next){
  
     Program.remove({
