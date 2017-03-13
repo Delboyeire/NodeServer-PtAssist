@@ -82,9 +82,10 @@ exports.addClientProgram = function(req, res, next){
         }
     
     });
+    
      User.update(
             client_id,
-            {$push: {programs: {new_program_id}},
+            {$push: {programs: new_program_id}},
             {safe: true, upsert: false},
             function(err, User) {
                 if(err){
