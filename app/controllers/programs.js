@@ -17,12 +17,12 @@ exports.getPrograms = function(req, res, next){
 exports.getTrainerPrograms = function(req, res, next){
  
      var trainer_id = req.params.trainer_id;
-        Program.find({createdby: trainer_id},function(err, clients) {
+        Program.find({createdby: trainer_id},function(err, programs) {
  
         if (err){
             res.send(err);
         }
-        res.json(clients);
+        res.json(programs);
  
     });
  
@@ -82,10 +82,10 @@ exports.addClientProgram = function(req, res, next){
         }
     
     });
-     User.findByIdAndUpdate(
+     User.update(
             client_id,
-            {$push: {programs: new_program_id}},
-            {safe: true, upsert: true},
+            {$push: {programs: {new_program_id}},
+            {safe: true, upsert: false},
             function(err, User) {
                 if(err){
                 res.send(err);
