@@ -69,6 +69,7 @@ exports.addClientProgram = function(req, res, next){
                 if(err){
                 res.send(err);
                 }
+                res.json(User);
             });
 }
 exports.deleteProgram = function(req, res, next){
