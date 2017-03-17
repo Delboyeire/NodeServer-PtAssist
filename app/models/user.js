@@ -22,7 +22,12 @@ var UserSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'User'
     },
-    programs:  [{ type : mongoose.Schema.Types.ObjectId, ref: 'Program' }],
+    programs:  [
+        { 
+            type : mongoose.Schema.Types.ObjectId, 
+            ref: 'Program' 
+        }
+        ],
     name: {
         type: String,
         required: true
