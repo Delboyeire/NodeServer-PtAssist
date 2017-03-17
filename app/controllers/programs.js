@@ -57,31 +57,9 @@ exports.createProgram = function(req, res, next){
 }
 exports.addClientProgram = function(req, res, next){
  
-    var new_program = {
-        title : req.body.title,
-        description: req.body.description,
-        exercises: req.body.exercises,
-        createdby: req.body.createdby };
-
-    console.log(new_program);
-
+    
     var client_id = req.body.client_id;
-    var new_program_id;
-    
-    Program.create({
-        title : req.body.title,
-        description: req.body.description,
-        exercises: req.body.exercises,
-        createdby: req.body.createdby
-
-    }, function(err, program) {
-        new_program_id = program._id;
-        console.log("New Program id :" + new_program_id);
-        if(err){
-            res.send(err);
-        }
-    
-    });
+    var new_program_id = req.body.programid;
     
      User.update(
             client_id,
