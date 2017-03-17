@@ -10,8 +10,9 @@ var ProgramSchema = new mongoose.Schema({
     }, 
     exercises: [
         {
-            Exercise:{
-                type: String
+            exercise:{
+                type: mongoose.Schema.Types.ObjectId, 
+                ref: 'Exercise'
             },
             sets:{
                 type: Number
