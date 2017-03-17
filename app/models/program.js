@@ -8,7 +8,16 @@ var ProgramSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'User'
     }, 
-    exercises: [{Exercise:{type: mongoose.Schema.Types.ObjectId, ref: 'Exercise'},sets:{type: Number}} ]
+    exercises: [
+        {
+            Exercise:{
+                type: String
+            },
+            sets:{
+                type: Number
+            }
+        } 
+        ]
 }, {
     timestamps: true
 });

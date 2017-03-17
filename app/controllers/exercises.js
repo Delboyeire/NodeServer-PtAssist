@@ -12,6 +12,20 @@ exports.getExercises = function(req, res, next){
     });
  
 }
+exports.getExercisesForProgram = function(req, res, next){
+
+    exercise_ids = req.body.exercise_ids;
+ 
+    Exercise.find({ "_id": { "$in": [exercise_ids ] } },function(err, exercises) {
+ 
+        if (err){
+            res.send(err);
+        }
+        res.json(exercises);
+ 
+    });
+ 
+}
  
 exports.createExercise = function(req, res, next){
  
