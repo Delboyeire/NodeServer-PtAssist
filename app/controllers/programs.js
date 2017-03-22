@@ -30,7 +30,7 @@ exports.getTrainerPrograms = function(req, res, next){
 exports.returnClientPrograms = function(req, res, next){
  
      var client_id = req.params.client_id;
-        User.findOne(client_id, 'programs', function (err, programs) {
+        User.findOne({_id: client_id}, 'programs', function (err, programs) {
  
         if (err){
             res.send(err);
