@@ -27,6 +27,34 @@ exports.getTrainerPrograms = function(req, res, next){
     });
  
 }
+exports.returnClientPrograms = function(req, res, next){
+ 
+     var client_id = req.params.client_id;
+        User.findOne(client_id, 'programs', function (err, programs) {
+ 
+        if (err){
+            res.send(err);
+        }
+        res.json(programs);
+ 
+    });
+ 
+}
+exports.removeClientProgram = function(req, res, next){
+ 
+     var client_id = req.params.client_id;
+     var program_id = req.params.program_id;
+         User.update(
+            client_id,
+            {$pull: {programs: program_id}},
+            function(err, User) {
+                if(err){
+                res.send(err);
+                }
+                res.json(User);
+            });
+ 
+}
  
 exports.createProgram = function(req, res, next){
  
