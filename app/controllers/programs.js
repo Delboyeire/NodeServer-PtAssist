@@ -1,5 +1,6 @@
 var Program = require('../models/program');
 var User = require('../models/user');
+
  
 exports.getPrograms = function(req, res, next){
  
@@ -30,8 +31,12 @@ exports.getTrainerPrograms = function(req, res, next){
 exports.returnClientPrograms = function(req, res, next){
  
      var client_id = req.params.client_id;
-        User.findOne({_id: client_id}, 'programs', function (err, programs) {
- 
+        User.find({_id: client_id}, 'programs', function (err, programs) {
+            
+            console.log(programs)
+            if( programs.length < 1){
+                console.log("No Client Programs")
+            }
         if (err){
             res.send(err);
         }
@@ -87,7 +92,7 @@ exports.addClientProgram = function(req, res, next){
  
     
     var client_id = req.body.client_id;
-    var new_program_id = req.body.programid;
+    var new_program_id = req.body.program_id;
     
      User.update(
             client_id,

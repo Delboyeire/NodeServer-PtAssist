@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var bcrypt   = require('bcrypt-nodejs');
+var Program = require('../models/program');
  
 var UserSchema = new mongoose.Schema({
  
@@ -23,10 +24,10 @@ var UserSchema = new mongoose.Schema({
         ref: 'User'
     },
     programs:  [
-        { 
-            type : mongoose.Schema.Types.ObjectId, 
-            ref: 'Program' 
-        }
+       {
+                type: mongoose.Schema.Types.ObjectId, 
+                ref: 'Program'
+            }
         ],
     name: {
         type: String,
