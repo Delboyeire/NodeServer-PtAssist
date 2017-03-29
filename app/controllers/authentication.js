@@ -156,5 +156,21 @@ exports.deleteClient = function(req, res, next){
     });
  
 }
+exports.addBodyweight = function(req, res, next){
+ 
+    
+    var user_id = req.body.user_id;
+    var new_weight = req.body.new_weight;
+    
+     User.update(
+            client_id,
+            {$push: { 'stats.bodyweight': new_weight }},
+            function(err, User) {
+                if(err){
+                res.send(err);
+                }
+                res.json(User);
+            });
+}
  
  

@@ -29,6 +29,15 @@ var UserSchema = new mongoose.Schema({
                 ref: 'Program'
             }
         ],
+    stats: 
+       {
+          bodyweight: 
+              [ {
+                  measurement:{ type: Number},
+                 time : { type : Date, default: Date.now }
+              }
+              ]
+        },
     name: {
         type: String,
         required: true
