@@ -158,14 +158,18 @@ exports.deleteClient = function(req, res, next){
 }
 exports.addBodyweight = function(req, res, next){
  
-    
+    console.log("In addBodyweight function");
     var client_id = req.body.client_id;
     var new_weight = req.body.weight;
-    console.log(new_weight);
+    var weight = {
+        weight: req.body.weight,
+        date: req.body.date
+    };
     
      User.update(
             client_id,
-            {$push: { 'stats.bodyweight': {new_weight} }},
+            {$push: {'stats.bodyweight': weight}},
+            {safe: true, upsert: false},
             function(err, User) {
                 if(err){
                 res.send(err);
