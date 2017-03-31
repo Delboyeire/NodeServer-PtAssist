@@ -167,10 +167,10 @@ exports.addBodyweight = function(req, res, next){
     };
     console.log("weight : " + weight.measurement + ", time : " + weight.time);
     
-     User.update(
+     User.findOneAndUpdate(
             client_id,
             {$push: {'stats.bodyweight': weight}},
-            {safe: true, upsert: false},
+            {safe: true, upsert: false, new: true},
             function(err, User) {
                 if(err){
                 console.log("error :" + err);
