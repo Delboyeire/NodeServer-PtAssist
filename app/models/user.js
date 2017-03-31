@@ -33,6 +33,7 @@ var UserSchema = new mongoose.Schema({
        {
           bodyweight: 
               [ {
+                  _id: false,
                   measurement:{ type: Number},
                  time : { type : Date, default: Date.now }
               }
