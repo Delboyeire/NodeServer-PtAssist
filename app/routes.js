@@ -43,6 +43,7 @@ module.exports = function(app){
     programRoutes.get('/', requireAuth, AuthenticationController.roleAuthorization(['client','trainer','admin']), ProgramController.getPrograms);
     programRoutes.get('/trainer/:trainer_id', requireAuth, AuthenticationController.roleAuthorization(['trainer','admin']), ProgramController.getTrainerPrograms);
     programRoutes.get('/client_programs/:client_id', requireAuth, AuthenticationController.roleAuthorization(['client','trainer','admin']), ProgramController.returnClientPrograms);
+    programRoutes.get('/client_stats/bodyweight/:client_id', requireAuth, AuthenticationController.roleAuthorization(['client','trainer','admin']), ProgramController.returnClientWeights);
     programRoutes.post('/', requireAuth, AuthenticationController.roleAuthorization(['trainer','admin']), ProgramController.createProgram);
     programRoutes.post('/client/:client_id', requireAuth, AuthenticationController.roleAuthorization(['trainer','admin']), ProgramController.addClientProgram);
     programRoutes.delete('/:exercise_id', requireAuth, AuthenticationController.roleAuthorization(['trainer','admin']), ProgramController.deleteProgram);
