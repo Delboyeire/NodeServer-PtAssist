@@ -160,7 +160,7 @@ exports.addBodyweight = function(req, res, next){
  
     
     var user_id = req.body.user_id;
-    var new_weight = req.body.new_weight;
+    var new_weight = req.body.weight;
     
      User.update(
             client_id,
