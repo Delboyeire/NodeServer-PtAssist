@@ -161,9 +161,11 @@ exports.addBodyweight = function(req, res, next){
     console.log("In addBodyweight function");
     var client_id = req.body.client_id;
     var new_weight = req.body.weight;
+    console.log("measurement : " + req.body.weight);
+    console.log("date : " + req.body.date);
     var weight = {
-        weight: req.body.weight,
-        date: req.body.date
+        measurement: req.body.weight,
+        time: req.body.date
     };
     
      User.update(
