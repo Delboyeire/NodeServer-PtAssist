@@ -159,16 +159,16 @@ exports.deleteClient = function(req, res, next){
 exports.addBodyweight = function(req, res, next){
  
     console.log("In addBodyweight function");
-    var client_id = req.body.client_id;
+    var client_id = req.params.client_id;
     console.log(client_id);
     var weight = {
         measurement: req.body.weight,
         time : req.body.date
     };
-    console.log("weight : " + weight.measurement + ", time : " + weight.time);
+    console.log("weight : " + weight.measurement + ", time : " + weight.time + ", Client id : " + req.params.client_id);
     
      User.findOneAndUpdate(
-            {_id : client_id},
+            {_id : req.params.client_id},
             {$push: {'stats.bodyweight': weight}},
             {safe: true, upsert: false, new: true},
             function(err, User) {
