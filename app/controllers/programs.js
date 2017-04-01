@@ -49,7 +49,9 @@ exports.returnClientWeights = function(req, res, next){
     console.log("In return client weights");
  
      var client_id = req.params.client_id;
-        User.find({_id: client_id}, 'stats.bodyweight', function (err, weights) {
+        User.find({_id: client_id}, 'stats.bodyweight')
+        .select('measurement')
+        .exec(function(err, data){
             
             console.log(weights);
             if( weights.length < 1){
