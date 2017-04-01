@@ -47,11 +47,9 @@ exports.returnClientPrograms = function(req, res, next){
 }
 exports.returnClientWeights = function(req, res, next){
     console.log("In return client weights");
- 
      var client_id = req.params.client_id;
-        User.find({_id: client_id}, 'stats.bodyweight')
-        .exec(function(err, weights){
-            
+
+        User.find({_id: client_id}, {'stats.bodyweight': 1, _id: 0}, function(err, weights){ 
             console.log(weights.stats);
             if( weights.length < 1){
                 console.log("No Client weights");
