@@ -51,7 +51,7 @@ exports.returnClientWeights = function(req, res, next){
      var client_id = req.params.client_id;
         User.find({_id: client_id}, 'stats.bodyweight')
         .select('measurement')
-        .exec(function(err, data){
+        .exec(function(err, weights){
             
             console.log(weights);
             if( weights.length < 1){
