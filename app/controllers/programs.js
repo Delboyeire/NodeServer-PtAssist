@@ -46,13 +46,14 @@ exports.returnClientPrograms = function(req, res, next){
  
 }
 exports.returnClientWeights = function(req, res, next){
+    console.log("In return client weigths");
  
      var client_id = req.params.client_id;
         User.find({_id: client_id}, 'stats.bodyweight', function (err, weights) {
             
-            console.log(weights)
+            console.log(weights);
             if( programs.length < 1){
-                console.log("No Client weigths")
+                console.log("No Client weigths");
             }
         if (err){
             res.send(err);
