@@ -50,10 +50,9 @@ exports.returnClientWeights = function(req, res, next){
  
      var client_id = req.params.client_id;
         User.find({_id: client_id}, 'stats.bodyweight')
-        .select('measurement')
         .exec(function(err, weights){
             
-            console.log(weights);
+            console.log(weights.stats);
             if( weights.length < 1){
                 console.log("No Client weights");
             }
