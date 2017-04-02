@@ -49,18 +49,20 @@ exports.returnClientWeights = function(req, res, next){
     console.log("In return client weights");
      var client_id = req.params.client_id;
 
-        User.find({_id: client_id}, {'stats.bodyweight': 1, _id: 0})
-        .forEach( function(weights) {
-             console.log( "user: " + weights.stats ); 
-             res.json(weights);
-            }); 
+        User.find({_id: client_id}, {'stats.bodyweight.measurement': 1,'stats.bodyweight.time':1, _id: 0}, function(err, weights){ 
             
-            
+             if (err){
+            res.send(err);
+             }
+            if( weights.length < 1){
+                console.log("No Client weights");
+            }
+
             
        
-        
+        res.json(weights);
  
-   
+    });
  
 }
 exports.removeClientProgram = function(req, res, next){
