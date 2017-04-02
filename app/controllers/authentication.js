@@ -132,15 +132,24 @@ exports.getClientDetails = function(roles){
 }
 exports.getClients = function(req, res, next){
     
-        var trainerid = req.params.trainerid;
-        User.find({trainer: trainerid},function(err, clients) {
+        //var trainerid = req.params.trainerid;
+        //User.find({trainer: trainerid},function(err, clients) {
  
-        if (err){
-            res.send(err);
-        }
-        res.json(clients);
+        //if (err){
+         //   res.send(err);
+        //}
+        //res.json(clients);
  
-    });
+    //});
+
+
+   User .find({trainer: trainerid})
+        .populate('programs') // only works if we pushed refs to children
+        .exec(function (err, clients) {
+            if (err) return handleError(err);
+        console.log(clients);
+        res.json(clients)
+        });
  
 }
 exports.deleteClient = function(req, res, next){
@@ -158,14 +167,14 @@ exports.deleteClient = function(req, res, next){
 }
 exports.addBodyweight = function(req, res, next){
  
-    console.log("In addBodyweight function");
+    
     var client_id = req.params.client_id;
-    console.log(client_id);
+    
     var weight = {
         measurement: req.body.weight,
         time : req.body.date
     };
-    console.log("weight : " + weight.measurement + ", time : " + weight.time + ", Client id : " + req.params.client_id);
+    
     
      User.findOneAndUpdate(
             {_id : req.params.client_id},

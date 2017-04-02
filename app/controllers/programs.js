@@ -31,19 +31,13 @@ exports.getTrainerPrograms = function(req, res, next){
 exports.returnClientPrograms = function(req, res, next){
  
      var client_id = req.params.client_id;
-        User.find({_id: client_id}, 'programs', function (err, programs) {
-            
-            console.log(programs)
-            if( programs.length < 1){
-                console.log("No Client Programs")
-            }
-        if (err){
-            res.send(err);
-        }
-        res.json(programs);
- 
-    });
- 
+        User
+         .findOne({_id: client_id}, {'programs':1,_id:0})
+        .populate('programs') // only works if we pushed refs to children
+        .exec(function (err, person) {
+             if (err) return handleError(err);
+         res.json(person);
+        });
 }
 exports.returnClientWeights = function(req, res, next){
     console.log("In return client weights");
