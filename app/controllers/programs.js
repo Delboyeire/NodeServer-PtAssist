@@ -57,7 +57,7 @@ exports.returnClientWeights = function(req, res, next){
             if( weights.length < 1){
                 console.log("No Client weights");
             }else {
-                weights.each (function (error, doc){
+                weights.forEach (function (error, doc){
                     if(error){
                         console.log(error);
                     }
