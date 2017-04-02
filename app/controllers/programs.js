@@ -61,7 +61,7 @@ exports.returnClientWeights = function(req, res, next){
                     if(error){
                         console.log(error);
                     }
-                console.log("doc : " + doc.stats.bodyweight);
+                console.log("doc : " + doc);
                 });
             }
             
