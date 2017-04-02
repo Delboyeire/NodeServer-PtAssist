@@ -58,6 +58,9 @@ exports.returnClientWeights = function(req, res, next){
                 console.log("No Client weights");
             }else {
                 weights.each (function (error, doc){
+                    if(error){
+                        console.log(error);
+                    }
                 console.log("doc : " + doc);
                 });
             }
