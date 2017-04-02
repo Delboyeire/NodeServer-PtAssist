@@ -132,7 +132,7 @@ exports.getClientDetails = function(roles){
 }
 exports.getClients = function(req, res, next){
     
-        //var trainerid = req.params.trainerid;
+        var trainerid = req.params.trainerid;
         //User.find({trainer: trainerid},function(err, clients) {
  
         //if (err){
