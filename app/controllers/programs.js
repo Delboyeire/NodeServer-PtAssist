@@ -105,7 +105,7 @@ exports.createProgram = function(req, res, next){
 exports.addClientProgram = function(req, res, next){
  
     
-    var client_id = req.body.client_id;
+    var client_id = req.params.client_id;
     var new_program_id = req.body.program_id;
     
      User.update(
@@ -118,6 +118,7 @@ exports.addClientProgram = function(req, res, next){
                 }
                 res.json(User);
             });
+            
 }
 exports.deleteProgram = function(req, res, next){
  
