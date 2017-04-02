@@ -51,12 +51,18 @@ exports.returnClientWeights = function(req, res, next){
 
         User.find({_id: client_id}, {'stats.bodyweight': 1, _id: 0}, function(err, weights){ 
             console.log(weights.stats);
+             if (err){
+            res.send(err);
+             }
             if( weights.length < 1){
                 console.log("No Client weights");
+            }else {
+                weights.each (function (error, doc){
+                console.log("doc : " + doc);
+                });
             }
-        if (err){
-            res.send(err);
-        }
+            
+       
         res.json(weights);
  
     });
