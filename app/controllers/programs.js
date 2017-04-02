@@ -50,7 +50,7 @@ exports.returnClientWeights = function(req, res, next){
      var client_id = req.params.client_id;
 
         User.find({_id: client_id}, {'stats.bodyweight': 1, _id: 0}, function(err, weights){ 
-            console.log(weights.stats);
+            
              if (err){
             res.send(err);
              }
@@ -61,7 +61,7 @@ exports.returnClientWeights = function(req, res, next){
                     if(error){
                         console.log(error);
                     }
-                console.log("doc : " + doc);
+                console.log("doc : " + doc.stats.bodyweight);
                 });
             }
             
