@@ -116,15 +116,17 @@ exports.getClientDetails = function(roles){
  
         var client_id = req.client_id;
  
-        User.findById(client_id, function(err, foundUser){
- 
-            if(err){
-                res.status(422).json({error: 'No client found.'});
-                return next(err);
-            }
- 
-             res.json(foundUser);
- 
+        User 
+        .find({_id: client_id})
+        .populate({
+            path: 'programs',
+            // Get friends of friends - populate the 'friends' array for every friend
+            populate: { path: 'exercises' }
+        })
+        .exec(function (err, client) {
+            if (err) return handleError(err);
+        console.log(client);
+        res.json(client)
         });
  
     }
