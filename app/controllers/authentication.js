@@ -116,19 +116,15 @@ exports.getClientDetails = function(roles){
  
         var client_id = req.params.client_id;
  
-        User 
-        .findOne({_id: client_id})
+        User .find({_id: client_id})
         .populate({
             path: 'programs',
             populate: { path: 'exercises' }
         })
-        .exec(function (err, client) {
-            if (err) {
-                console.log(err);
-                res.json(err);
-            }
-        console.log(client);
-        res.json(client);
+        .exec(function (err, clients) {
+            if (err) return handleError(err);
+        console.log(clients);
+        res.json(clients);
         });
  
     }
@@ -142,7 +138,6 @@ exports.getClients = function(req, res, next){
    User .find({trainer: trainerid})
         .populate({
             path: 'programs',
-            // Get friends of friends - populate the 'friends' array for every friend
             populate: { path: 'exercises' }
         })
         .exec(function (err, clients) {

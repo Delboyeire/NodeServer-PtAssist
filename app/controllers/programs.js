@@ -42,7 +42,7 @@ exports.returnClientPrograms = function(req, res, next){
          .findOne({_id: client_id}, {'programs':1,_id:0})
         .populate({
             path: 'programs',
-            // Get friends of friends - populate the 'friends' array for every friend
+            
             populate: { path: 'exercises' }
         })
         .exec(function (err, person) {
@@ -51,7 +51,7 @@ exports.returnClientPrograms = function(req, res, next){
         });
 }
 exports.returnClientWeights = function(req, res, next){
-    console.log("In return client weights");
+   
      var client_id = req.params.client_id;
 
         User.find({_id: client_id}, {'stats.bodyweight.measurement': 1,'stats.bodyweight.time':1, _id: 0}, function(err, weights){ 
@@ -66,6 +66,19 @@ exports.returnClientWeights = function(req, res, next){
             
        
         res.json(weights);
+ 
+    });
+ 
+}
+exports.returnClientDiet = function(req, res, next){
+    
+     var client_id = req.params.client_id;
+
+        User.find({_id: client_id}, {'diet':1, _id: 0}, function(err, diet){ 
+             if (err){
+            res.send(err);
+             }
+        res.json(diet);
  
     });
  
