@@ -29,6 +29,7 @@ module.exports = function(app){
     authRoutes.delete('/delete/:user_id', requireAuth, AuthenticationController.roleAuthorization(['trainer','admin']), AuthenticationController.deleteClient);
     authRoutes.get('/clientdetail/:client_id', requireAuth, AuthenticationController.roleAuthorization(['trainer','client']), AuthenticationController.getClientDetails);
     authRoutes.post('/stats/weight/:client_id', requireAuth, AuthenticationController.roleAuthorization(['client','trainer']), AuthenticationController.addBodyweight);
+    authRoutes.post('/diet/:client_id', requireAuth, AuthenticationController.roleAuthorization(['trainer']), AuthenticationController.updateDiet);
     // Exercise Routes
     apiRoutes.use('/exercises', exerciseRoutes);
  
