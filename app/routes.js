@@ -47,6 +47,7 @@ module.exports = function(app){
     programRoutes.post('/', requireAuth, AuthenticationController.roleAuthorization(['trainer','admin']), ProgramController.createProgram);
     programRoutes.post('/client/:client_id', requireAuth, AuthenticationController.roleAuthorization(['trainer','admin']), ProgramController.addClientProgram);
     programRoutes.delete('/:exercise_id', requireAuth, AuthenticationController.roleAuthorization(['trainer','admin']), ProgramController.deleteProgram);
+    programRoutes.delete('/client/delete/:client_id/:program_id', requireAuth, AuthenticationController.roleAuthorization(['trainer','admin']), ProgramController.removeClientProgram);
  
     // Set up routes
     app.use('/api', apiRoutes);

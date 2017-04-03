@@ -18,14 +18,22 @@ exports.getPrograms = function(req, res, next){
 exports.getTrainerPrograms = function(req, res, next){
  
      var trainer_id = req.params.trainer_id;
-        Program.find({createdby: trainer_id},function(err, programs) {
- 
-        if (err){
+        Program
+        .find({createdby: trainer_id})
+        .populate({
+            path: 'programs',
+            populate: { path: 'exercises' }
+        })
+        .exec(function (err, programs) {
+             if (err){
             res.send(err);
-        }
-        res.json(programs);
+            }
+            res.json(programs);
+        });
  
-    });
+       
+ 
+   
  
 }
 exports.returnClientPrograms = function(req, res, next){
@@ -33,7 +41,11 @@ exports.returnClientPrograms = function(req, res, next){
      var client_id = req.params.client_id;
         User
          .findOne({_id: client_id}, {'programs':1,_id:0})
-        .populate('programs') // only works if we pushed refs to children
+        .populate({
+            path: 'programs',
+            // Get friends of friends - populate the 'friends' array for every friend
+            populate: { path: 'exercises' }
+        })
         .exec(function (err, person) {
              if (err) return handleError(err);
          res.json(person);

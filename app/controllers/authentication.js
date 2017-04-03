@@ -133,18 +133,14 @@ exports.getClientDetails = function(roles){
 exports.getClients = function(req, res, next){
     
         var trainerid = req.params.trainerid;
-        //User.find({trainer: trainerid},function(err, clients) {
- 
-        //if (err){
-         //   res.send(err);
-        //}
-        //res.json(clients);
- 
-    //});
-
+        
 
    User .find({trainer: trainerid})
-        .populate('programs') // only works if we pushed refs to children
+        .populate({
+            path: 'programs',
+            // Get friends of friends - populate the 'friends' array for every friend
+            populate: { path: 'exercises' }
+        })
         .exec(function (err, clients) {
             if (err) return handleError(err);
         console.log(clients);
