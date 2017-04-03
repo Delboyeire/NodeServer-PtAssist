@@ -42,6 +42,13 @@ var UserSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
+    },
+    diet:{
+        calories: {type: number},
+        protein: {type: number},
+        fats: {type: number},
+        carbs: {type: number},
+        fiber: {type: number}
     }
  
 }, {

@@ -189,5 +189,32 @@ exports.addBodyweight = function(req, res, next){
                 res.json(User);
             });
 }
+exports.updateDiet = function(req, res, next){
+ 
+    
+    var client_id = req.params.client_id;
+    
+    var diet = {
+        calories: req.body.calories,
+        protein : req.body.protein,
+        fats: req.body.fats,
+        carbs: req.body.carbs,
+        fiber: req.body.fiber
+    };
+    
+    
+     User.findOneAndUpdate(
+            {_id : req.params.client_id},
+            {'diet': diet},
+            {overwrite: true, new: true},
+            function(err, User) {
+                if(err){
+                console.log("error :" + err);
+                res.send(err);
+                }
+                console.log("user :" + User);
+                res.json(User);
+            });
+}
  
  

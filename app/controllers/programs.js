@@ -91,6 +91,7 @@ exports.createProgram = function(req, res, next){
     Program.create({
         title : req.body.title,
         description: req.body.description,
+        exercises: req.body.exercises,
         createdby: req.body.createdby
 
     }, function(err, program) {
@@ -98,25 +99,16 @@ exports.createProgram = function(req, res, next){
         if (err){
             res.send(err);
         }
-        var program_id = program._id;
-        Program.findByIdAndUpdate(
-            program_id,
-            {$push: {exercises: req.params.exercises}},
-            {safe: true, upsert: false, new: true},
-            function(err, program) {
-                if(err){
+ 
+        Program.find(function(err, programs) {
+ 
+            if (err){
                 res.send(err);
-                }
-                Program.find(function(err, programs) {
+            }
  
-                    if (err){
-                        res.send(err);
-                    }
+            res.json(programs);
  
-                    res.json(programs);
- 
-                });
-            });
+        });
  
     });
  
