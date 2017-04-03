@@ -117,16 +117,18 @@ exports.getClientDetails = function(roles){
         var client_id = req.client_id;
  
         User 
-        .find({_id: client_id})
+        .findOne({_id: client_id})
         .populate({
             path: 'programs',
-            // Get friends of friends - populate the 'friends' array for every friend
             populate: { path: 'exercises' }
         })
         .exec(function (err, client) {
-            if (err) return handleError(err);
+            if (err) {
+                console.log(err);
+                res.json(err);
+            }
         console.log(client);
-        res.json(client)
+        res.json(client);
         });
  
     }
