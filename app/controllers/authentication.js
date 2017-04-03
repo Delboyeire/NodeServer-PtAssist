@@ -114,7 +114,7 @@ exports.getClientDetails = function(roles){
  
     return function(req, res, next){
  
-        var client_id = req.client_id;
+        var client_id = req.params.client_id;
  
         User 
         .findOne({_id: client_id})
