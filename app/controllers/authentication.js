@@ -39,6 +39,7 @@ exports.registerUser = function(req, res, next){
     var trainer = req.body.trainer;
     var programs= req.body.programs;
     var name = req.body.name;
+    var diet = req.body.diet;
     if(!email){
         return res.status(422).send({error: 'You must enter an email address'});
     }
@@ -63,7 +64,8 @@ exports.registerUser = function(req, res, next){
             role: role,
             trainer: trainer,
             programs: programs,
-            name: name
+            name: name,
+            diet: diet
         });
  
         user.save(function(err, user){
