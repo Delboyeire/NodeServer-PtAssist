@@ -21,8 +21,7 @@ exports.getTrainerPrograms = function(req, res, next){
         Program
         .find({createdby: trainer_id})
         .populate({
-            path: 'programs',
-            populate: { path: 'exercises' }
+            path: 'exercises',
         })
         .exec(function (err, programs) {
              if (err){
