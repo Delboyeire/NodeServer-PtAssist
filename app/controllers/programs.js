@@ -91,7 +91,6 @@ exports.createProgram = function(req, res, next){
     Program.create({
         title : req.body.title,
         description: req.body.description,
-        exercises: req.body.exercises,
         createdby: req.body.createdby
 
     }, function(err, program) {
@@ -99,16 +98,25 @@ exports.createProgram = function(req, res, next){
         if (err){
             res.send(err);
         }
- 
-        Program.find(function(err, programs) {
- 
-            if (err){
+        var program_id = program._id;
+        Program.findByIdAndUpdate(
+            program_id,
+            {$push: {exercises: req.params.exercises}},
+            {safe: true, upsert: false, new: true},
+            function(err, program) {
+                if(err){
                 res.send(err);
-            }
+                }
+                Program.find(function(err, programs) {
  
-            res.json(programs);
+                    if (err){
+                        res.send(err);
+                    }
  
-        });
+                    res.json(programs);
+ 
+                });
+            });
  
     });
  
@@ -117,10 +125,21 @@ exports.addClientProgram = function(req, res, next){
  
     
     var client_id = req.params.client_id;
-    var new_program_id = req.body._id;
-    console.log(new_program_id)
     
-     User.findByIdAndUpdate(
+    console.log(new_program_id)
+    Program.create({
+        title : req.body.title,
+        description: req.body.description,
+        exercises: req.body.exercises,
+        createdby: req.body.createdby
+
+    }, function(err, program) {
+ 
+        if (err){
+            res.send(err);
+        }
+        var new_program_id = program._id;
+        User.findByIdAndUpdate(
             client_id,
             {$push: {programs: new_program_id}},
             {safe: true, upsert: false, new: true},
@@ -130,6 +149,10 @@ exports.addClientProgram = function(req, res, next){
                 }
                 res.json(User);
             });
+ 
+    });
+    
+     
             
 }
 exports.deleteProgram = function(req, res, next){
