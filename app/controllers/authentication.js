@@ -102,7 +102,7 @@ exports.roleAuthorization = function(roles){
                 return next();
             }
  
-            res.status(401).json({error: 'You are not authorized to view this content'});
+            res.status(401).json('You are not authorized to view this content');
             return next('Unauthorized');
  
         });
@@ -148,7 +148,7 @@ exports.getClients = function(req, res, next){
         .exec(function (err, clients) {
             if (err) return handleError(err);
         console.log(clients);
-        res.json(clients)
+        res.json(clients);
         });
  
 }

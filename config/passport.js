@@ -11,9 +11,13 @@ var localOptions = {
  
 var localLogin = new LocalStrategy(localOptions, function(email, password, done){
  
-    User.findOne({
-        email: email
-    }, function(err, user){
+    User
+    .findOne({email: email})
+    .populate({
+            path: 'programs',
+            populate: { path: 'exercises' }
+        })
+        .exec(function (err, user) {
  
         if(err){
             return done(err);
@@ -36,8 +40,9 @@ var localLogin = new LocalStrategy(localOptions, function(email, password, done)
             return done(null, user);
  
         });
+        });
  
-    });
+  
  
 });
  
