@@ -190,11 +190,19 @@ exports.updateDiet = function(req, res, next){
  
     
     var client_id = req.params.client_id;
+
+    var diet = {
+        calories: req.body.calories,
+        protein : req.body.protein,
+        fats : req.body.fats,
+        carbs : req.body.carbs,
+        fiber : req.body.fiber
+    };
     
      User.findOneAndUpdate(
             {_id : req.params.client_id},
-            { "$set": { "diet.calories": req.body.calories, "diet.protein": req.body.protein, "diet.fats": req.body.fats, "diet.carbs": req.body.carbs,"diet.fiber": req.body.fiber}},
-            {overwrite: true, new: true},
+            {$push: {diet: diet}},
+            {safe: true, upsert: false, new: true},
             function(err, User) {
                 if(err){
                 console.log("error :" + err);

@@ -29,6 +29,24 @@ var UserSchema = new mongoose.Schema({
                 ref: 'Program'
             }
         ],
+    diet:   [
+    {
+        calories: {
+            type: Number
+        },
+        protein: {
+            type: Number
+        },
+        fats: {
+            type: Number
+        },
+        carbs: {
+            type: Number
+        },
+        fiber: {
+            type: Number
+        }
+    }],
     stats: 
        {
           bodyweight: 
@@ -43,14 +61,6 @@ var UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    diet:
-    {
-        calories: {type: Number},
-        protein: {type: Number},
-        fats: {type: Number},
-        carbs: {type: Number},
-        fiber: {type: Number}
-    }
  
 }, {
     timestamps: true
