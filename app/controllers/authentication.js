@@ -116,13 +116,13 @@ exports.roleAuthorization = function(roles){
     }
  
 }
-exports.getClientDetails = function(roles){
+exports.getClientDetails = function(req,res,next){
  
-    return function(req, res, next){
+   
  
         var client_id = req.params.client_id;
  
-         User .find({_id: client_id})
+         User.find({_id: client_id})
         .populate({
             path: 'programs',
             populate: { path: 'exercises' }
@@ -141,7 +141,7 @@ exports.getClients = function(req, res, next){
         var trainerid = req.params.trainerid;
         
 
-   User .find({trainer: trainerid})
+   User.find({trainer: trainerid})
         .populate({
             path: 'programs',
             populate: { path: 'exercises' }
