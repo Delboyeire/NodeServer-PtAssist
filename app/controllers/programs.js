@@ -130,19 +130,9 @@ exports.addClientProgram = function(req, res, next){
  
     
     var client_id = req.params.client_id;
-    
+    var new_program_id = req.body._id
     console.log(new_program_id)
-    Program.create({
-        title : req.body.title,
-        description: req.body.description,
-        exercises: req.body.exercises,
-        createdby: req.body.createdby
-
-    }, function(err, program) {
- 
-        if (err){
-            res.send(err);
-        }
+    
         var new_program_id = program._id;
         User.findByIdAndUpdate(
             client_id,
