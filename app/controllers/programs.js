@@ -54,7 +54,10 @@ exports.returnClientWeights = function(req, res, next){
    
      var client_id = req.params.client_id;
 
-        User.find({_id: client_id}, {'stats.bodyweight.measurement': 1,'stats.bodyweight.time':1, _id: 0}, function(err, weights){ 
+        User.
+        find({_id: client_id},
+         {'stats.bodyweight.measurement': 1,'stats.bodyweight.time':1, _id: 0},
+          function(err, weights){ 
             
              if (err){
             res.send(err);
