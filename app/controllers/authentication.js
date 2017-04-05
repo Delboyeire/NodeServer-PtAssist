@@ -15,7 +15,8 @@ function setUserInfo(request){
         role: request.role,
         trainer: request.trainer,
         programs: request.programs,
-        name: request.name
+        name: request.name,
+        diet: request.diet
     };
 }
  
@@ -209,7 +210,7 @@ exports.updateDiet = function(req, res, next){
                 res.send(err);
                 }
                 console.log("user :" + User);
-                res.json(User);
+                res.json(User.diet);
             });
 }
  
