@@ -123,10 +123,10 @@ exports.getClientDetails = function(roles){
             path: 'programs',
             populate: { path: 'exercises' }
         })
-        .exec(function (err, clients) {
+        .exec(function (err, client) {
             if (err) return handleError(err);
-        console.log(clients);
-        res.json(clients);
+        console.log(client);
+        res.json(client);
         });
  
     }
