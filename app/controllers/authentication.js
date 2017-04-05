@@ -122,7 +122,7 @@ exports.getClientDetails = function(req,res,next){
  
         var client_id = req.params.client_id;
  
-         User.find({_id: client_id})
+         User.findOne({_id: client_id})
         .populate({
             path: 'programs',
             populate: { path: 'exercises' }
