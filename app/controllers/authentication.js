@@ -16,6 +16,7 @@ function setUserInfo(request){
         trainer: request.trainer,
         programs: request.programs,
         name: request.name,
+        stats: req.stats,
         diet: request.diet
     };
 }
@@ -39,6 +40,7 @@ exports.registerUser = function(req, res, next){
     var role = req.body.role;
     var trainer = req.body.trainer;
     var programs= req.body.programs;
+    var stats = req.body.stats;
     var name = req.body.name;
     var diet = req.body.diet;
     if(!email){
@@ -65,6 +67,7 @@ exports.registerUser = function(req, res, next){
             role: role,
             trainer: trainer,
             programs: programs,
+            stats: stats,
             name: name,
             diet: diet
         });
