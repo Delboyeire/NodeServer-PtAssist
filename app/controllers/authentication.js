@@ -16,7 +16,7 @@ function setUserInfo(request){
         trainer: request.trainer,
         programs: request.programs,
         name: request.name,
-        stats: req.stats,
+        stats: request.stats,
         diet: request.diet
     };
 }
