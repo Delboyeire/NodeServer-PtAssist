@@ -122,7 +122,8 @@ exports.getClientDetails = function(roles){
  
         var client_id = req.params.client_id;
  
-        User .find({_id: client_id})
+        User 
+        .find({_id: client_id})
         .populate({
             path: 'programs',
             populate: { path: 'exercises' }
@@ -133,7 +134,7 @@ exports.getClientDetails = function(roles){
         res.json(client);
         });
  
-    }
+    
  
 }
 exports.getClients = function(req, res, next){
