@@ -11,6 +11,7 @@ var ProgramSchema = new mongoose.Schema({
     }, 
     exercises: [
         {
+            _id: false,
             exercise:{
                 type: mongoose.Schema.Types.ObjectId, 
                 ref: 'Exercise'

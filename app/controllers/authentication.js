@@ -144,7 +144,7 @@ exports.getClients = function(req, res, next){
    User.find({trainer: trainerid})
         .populate({
             path: 'programs',
-            populate: { path: 'exercises' }
+            populate: { path: 'exercises.exercise' }
         })
         .exec(function (err, clients) {
             if (err) return handleError(err);
