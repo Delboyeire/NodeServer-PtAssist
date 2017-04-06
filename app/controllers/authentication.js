@@ -125,7 +125,7 @@ exports.getClientDetails = function(req,res,next){
          User.findOne({_id: client_id})
         .populate({
             path: 'programs',
-            populate: { path: 'exercises' }
+            populate: { path: 'exercises.exercise' }
         })
         .exec(function (err, client) {
             if (err) return handleError(err);
