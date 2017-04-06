@@ -5,15 +5,17 @@ var User = require('../models/user');
  
 exports.getPrograms = function(req, res, next){
  
-    Program.find(function(err, programs) {
- 
-        if (err){
+    Program
+        .find()
+        .populate({
+            path: 'exercises.exercise',
+        })
+        .exec(function (err, programs) {
+             if (err){
             res.send(err);
-        }
- 
-        res.json(programs);
- 
-    });
+            }
+            res.json(programs);
+        });
  
 }
 exports.getTrainerPrograms = function(req, res, next){
@@ -22,7 +24,7 @@ exports.getTrainerPrograms = function(req, res, next){
         Program
         .find({createdby: trainer_id})
         .populate({
-            path: 'exercises',
+            path: 'exercises.exercise',
         })
         .exec(function (err, programs) {
              if (err){
