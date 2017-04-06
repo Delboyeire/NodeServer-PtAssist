@@ -1,5 +1,5 @@
 var Program = require('../models/program');
-var Exercise = require('..models/exercise');
+var Exercise = require('../models/exercise');
 var User = require('../models/user');
 
  
