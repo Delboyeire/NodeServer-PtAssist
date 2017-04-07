@@ -1,5 +1,7 @@
 var passport = require('passport');
 var User = require('../app/models/user');
+var Program = require('../app/models/program');
+var Exercise = require('../app/models/program');
 var config = require('./auth');
 var JwtStrategy = require('passport-jwt').Strategy;
 var ExtractJwt = require('passport-jwt').ExtractJwt;
@@ -15,7 +17,7 @@ var localLogin = new LocalStrategy(localOptions, function(email, password, done)
     .findOne({email: email})
     .populate({
             path: 'programs',
-            populate: { path: 'exercises' }
+            populate: { path: 'exercises.exercise' }
         })
         .exec(function (err, user) {
  
